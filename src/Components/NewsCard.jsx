@@ -1,8 +1,6 @@
 import { format } from "date-fns";
-import { useState } from "react";
-import { CiBookmark, CiShare2, CiStar } from "react-icons/ci";
+import { CiBookmark, CiShare2 } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
-
 import { IoEye } from "react-icons/io5";
 
 const NewsCard = ({ news }) => {
@@ -13,18 +11,13 @@ const NewsCard = ({ news }) => {
     rating,
     total_view,
     details,
-    tags,
-    others,
   } = news;
 
-  const [isExpanded, setIsExpanded] = useState(false);
-  const characterLimit = 200;
-  const shouldShowReadMore = details.length > characterLimit;
+  
 
-  const displayText =
-    isExpanded || !shouldShowReadMore
-      ? details
-      : details.slice(0, characterLimit) + "...";
+  const displayText = details.length > 200
+      ? details.slice(0, 200) + "..."
+      : details;
 
   const formatDate = (dateString) => {
     return format(new Date(dateString), "MMMM dd, yyyy");
@@ -86,14 +79,12 @@ const NewsCard = ({ news }) => {
         <p className="text-sm text-accent">{displayText}</p>
 
         {/* Read More Button */}
-        {shouldShowReadMore && (
+    
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="text-orange-500 font-semibold text-left mt-2 hover:underline cursor-pointer"
-          >
-            {isExpanded ? "Read Less" : "Read More"}
+            className="text-orange-500 font-semibold text-left mt-2 hover:underline cursor-pointer">
+            Read More
           </button>
-        )}
+        
 
         {/* Footer Stats */}
         <div className="flex items-center justify-between mt-4 pt-4 border-t border-t-gray-300">
