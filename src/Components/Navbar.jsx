@@ -6,9 +6,15 @@ const Navbar = () => {
     <div className="flex items-center justify-between text-accent">
       <div className="flex-1"></div>
       <div className="flex gap-4 flex-1">
-        <NavLink to="/">Home</NavLink>
-        <NavLink>About</NavLink>
-        <NavLink>Career</NavLink>
+        <NavLink to="/" className="btn bg-base-100 border-0 shadow-none">
+          Home
+        </NavLink>
+        <NavLink to="/about" className="btn bg-base-100 border-0 shadow-none">
+          About
+        </NavLink>
+        <NavLink to="/career" className="btn bg-base-100 border-0 shadow-none">
+          Career
+        </NavLink>
       </div>
       <div className="flex items-center gap-2">
         <img src={user} className="" />

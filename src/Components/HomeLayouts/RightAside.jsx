@@ -1,10 +1,11 @@
+import SocialLogin from "./SocialLogin";
 
 
 const RightAside = () => {
     
     return (
         <div>
-            Right aside!
+            <SocialLogin></SocialLogin>
         </div>
     );
 };
