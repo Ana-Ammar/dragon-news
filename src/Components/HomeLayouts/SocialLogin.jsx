@@ -11,10 +11,9 @@ const SocialLogin = () => {
     signInWithGoogle()
       .then((res) => {
         setUser(res.user);
-        console.log(res.user);
       })
       .catch((err) => {
-        console.log(err.code, err.message);
+        console.log(err.code, err.message)
         alert(err.code, err.message);
       });
   };
@@ -23,10 +22,9 @@ const SocialLogin = () => {
     signInWithGithub()
       .then((res) => {
         setUser(res.user);
-        console.log(res.user);
       })
       .catch((err) => {
-        console.log(err.code, err.message);
+        console.log(err.code, err.message)
         alert(err.code, err.message);
       });
   };

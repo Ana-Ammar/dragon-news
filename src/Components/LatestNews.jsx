@@ -13,7 +13,6 @@ const LatestNews = () => {
       latestNewsTitle.push(d.title)
   );
 
-  console.log(latestNewsTitle)
 
   return (
     <div className="flex items-center gap-5 p-4 bg-base-200">

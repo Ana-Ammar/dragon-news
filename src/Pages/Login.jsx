@@ -3,37 +3,40 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
 
 const Login = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState("")
   const { signIn, passwordResetEmail } = use(AuthContext);
-  const location = useLocation();
-  const navigate = useNavigate();
-  const emailRef = useRef(null);
+  const location = useLocation()
+  const navigate = useNavigate()
+  const emailRef = useRef(null)
+
 
   const handleSignInBtn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+
     signIn(email, password)
-      .then((res) => {
-        // console.log(res.user)
-        navigate(`${location.state ? location.state : "/"}`);
-      })
-      .catch((error) => {
-        setError(error.code, error.message);
-      });
+    .then(res => {
+      // console.log(res.user)
+      navigate(`${location.state ? location.state : '/'}`)
+    })
+    .catch(error => {
+      setError(error.code, error.message)
+    })
   };
 
   const handleForgetPassword = () => {
     const email = emailRef.current.value;
     passwordResetEmail(email)
-      .then(() => {
-        alert("Password reset email sent");
-      })
-      .catch((error) => {
-        setError(error.code, error.message);
-      });
-  };
+    .then(() => {
+      alert('Password reset email sent')
+    })
+    .catch(error => {
+      console.log(error.code, error.message)
+      setError(error.code, error.message)
+    })
+  }
 
   return (
     <div>
@@ -61,12 +64,9 @@ const Login = () => {
             />
             <div>
               <button
-                onClick={handleForgetPassword}
-                type="button"
-                className="link link-hover"
-              >
-                Forgot password?
-              </button>
+              onClick={handleForgetPassword}
+              type="button"
+               className="link link-hover">Forgot password?</button>
             </div>
             <button type="submit" className="btn btn-primary mt-4 ">
               Login
@@ -82,11 +82,7 @@ const Login = () => {
               Register
             </Link>
           </p>
-          {error && (
-            <p className="text-center mt-4 text-secondary">
-              Plaese provide registered email and password
-            </p>
-          )}
+         {error && <p className="text-center mt-4 text-secondary">Plaese provide registered email and password</p>}
         </form>
       </div>
     </div>
