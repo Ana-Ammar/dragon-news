@@ -1,21 +1,27 @@
-import React, { use } from "react";
-import { Link } from "react-router";
+import React, { use, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
 
 const Login = () => {
+  const [error, setError] = useState("")
   const { signIn } = use(AuthContext);
+  const location = useLocation()
+  const navigate = useNavigate()
+
 
   const handleSignInBtn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+
+
     signIn(email, password)
     .then(res => {
-      console.log(res.user)
-      alert('sign in succesfully')
+      // console.log(res.user)
+      navigate(`${location.state ? location.state : '/'}`)
     })
     .catch(error => {
-      alert(error.code, error.message)
+      setError(error.code, error.message)
     })
   };
 
@@ -53,11 +59,13 @@ const Login = () => {
             Dont’t Have An Account ?{" "}
             <Link
               to="/auth/register"
+              state={location.state}
               className="text-secondary hover:underline cursor-pointer"
             >
               Register
             </Link>
           </p>
+         {error && <p className="text-center mt-4 text-secondary">Plaese provide registered email and password</p>}
         </form>
       </div>
     </div>

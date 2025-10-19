@@ -33,7 +33,7 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="flex items-center gap-2">
-        <img src={userIcon} className="" />
+        <img src={`${user ? user.photoURL : userIcon}`} className="w-10 h-10 object-cover rounded-full" />
         {user ? (
           <button
             onClick={handleSignOutBtn}

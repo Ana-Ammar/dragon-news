@@ -1,10 +1,13 @@
-import { use } from "react";
-import { Link } from "react-router";
+import { use, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
 
-
 const Register = () => {
-  const { createUser, setUser } = use(AuthContext);
+  const { createUser, setUser, updateUser } = use(AuthContext);
+  const [error, setError] = useState("")
+  const location = useLocation();
+  const navigate = useNavigate();
+  // console.log(location);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -12,16 +15,21 @@ const Register = () => {
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, photo, email, password);
+    // console.log(name, photo, email, password);
 
     createUser(email, password)
-    .then(res => {
-      console.log(res.user)
-      setUser(res.user)
-    })
-    .catch(error => {
-      console.log(error.message)
-    })
+      .then((res) => {
+        updateUser({ displayName: name, photoURL: photo }).then(() => {
+          setUser({ ...res.user, displayName: name, photoURL: photo });
+        })
+        .catch((error) => {
+          setError(error.message, 'in update profile info')
+        })
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((error) => {
+        setError(error.message, 'in create profile');
+      });
   };
   return (
     <div>
@@ -85,6 +93,7 @@ const Register = () => {
               Login
             </Link>
           </p>
+          {error && <p className="text-center mt-4 text-secondary">{error}</p>}
         </form>
       </div>
     </div>

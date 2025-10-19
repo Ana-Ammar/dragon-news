@@ -2,9 +2,11 @@ import { format } from "date-fns";
 import { CiBookmark, CiShare2 } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { IoEye } from "react-icons/io5";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
   const {
+    id,
     title,
     author,
     thumbnail_url,
@@ -80,10 +82,11 @@ const NewsCard = ({ news }) => {
 
         {/* Read More Button */}
     
-          <button
+          <Link
+            to={`/news-details/${id}`}
             className="text-orange-500 font-semibold text-left mt-2 hover:underline cursor-pointer">
             Read More
-          </button>
+          </Link>
         
 
         {/* Footer Stats */}
