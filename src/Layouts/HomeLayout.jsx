@@ -7,6 +7,8 @@ import RightAside from "../Components/HomeLayouts/RightAside";
 import Loading from "../Pages/Loading";
 
 const HomeLayout = () => {
+
+
   const { state } = useNavigation();
   return (
     <>
